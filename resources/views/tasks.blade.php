@@ -1,48 +1,47 @@
+<link rel="stylesheet" href="{{ asset('css/styles.css') }}" >
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" crossorigin="anonymous">
 
-<head>
-    <title>Tasks</title>
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/styles.css') }}">
-
-</head>
- @extends('layouts.app')
+@extends('layouts.app')
  
 @section('content')
  
     <!-- Bootstrap Boilerplate... -->
-<section>
+ 
     <div class="panel-body">
         <!-- Display Validation Errors -->
         @include('common.errors')
  
         <!-- New Task Form -->
-        <div class="t_container">
-            <br>
         <form action="{{ url('task') }}" method="POST" class="form-horizontal">
+            
             {{ csrf_field() }}
  
             <!-- Task Name -->
             <div class="form-group">
-                <label for="task" class="header-1">Enter your Name</label>
+                <label for="task" class="col-sm-3 control-label">Task Name:</label>
+ 
                 <div class="col-sm-6">
                     <input type="text" name="name" id="task-name" class="form-control">
                 </div>
             </div>
-            <!-- Add Task Button -->
+
             <br>
+ 
+            <!-- Add Task Button -->
             <div class="form-group">
                 <div class="col-sm-offset-3 col-sm-6">
-                    <button type="submit" class="btn btn-t">
-                        <i class="fa fa-plus" ></i> Add Task
+                    <button type="submit" class="btn btn-default">
+                        <i class="fa fa-plus"></i> Add a Task
                     </button>
                 </div>
             </div>
         </form>
     </div>
-
+    
+    <!-- Current Tasks -->
     @if (count($tasks) > 0)
         <div class="panel panel-default">
-            <br>
-            <div class="header-2">
+            <div class="panel-heading">
                 Current Tasks
             </div>
  
@@ -52,38 +51,28 @@
                     <!-- Table Headings -->
                     <thead>
                         <th>Task</th>
-                        <th> Date and Time Created</th>
-                        <th>Action</th>
+                        <th>&nbsp;</th>
                     </thead>
  
                     <!-- Table Body -->
-                    <tbody>
+                    <tbody class="tbody">
                         @foreach ($tasks as $task)
                             <tr>
-                                    <!-- TODO: Delete Button -->
-                                    <tr>
-                                        <!-- Task Name -->
-                                        <td class="table-text">
-                                            <div>{{ $task->name }}</div>
-                                        </td>
+                                <!-- Task Name -->
+                                <td class="table-text">
+                                    <div>{{ $task->name }}</div>
+                                </td>
+                                <!-- Delete Button -->
+                                <td class="delete-button">
+                                    <form action="{{ url('task/'.$task->id) }}" method="POST" id="delete-task-{{ $task->id }}">
+                                        {{ csrf_field() }}
+                                        {{ method_field('DELETE') }}
 
-                                        <td class="table-text">
-                                        <div class="small text-muted">{{ $task->created_at->format('Y-m-d H:i:s') }}</div>
-                                        </td>
-
-                                        <!-- Delete Button -->
-                                        <td>
-                                            <form action="{{ url('task/'.$task->id) }}" method="POST">
-                                                {{ csrf_field() }}
-                                                {{ method_field('DELETE') }}
-
-                                                <input type="hidden" name="_method" value="DELETE">
-                                                <button type="submit" class="btn btn-d">
-                                                    <i class="fa fa-trash"></i> Delete
-                                                </button>
-                                            </form>
-                                        </td>
-                                    </tr>
+                                        <button type="submit" class="btn btn-danger delete-task" data-task-id="{{ $task->id }}">
+                                        <i class="fa fa-trash"></i> Remove Task
+                                        </button>
+                                    </form>
+                                </td>
                             </tr>
                         @endforeach
                     </tbody>
@@ -92,6 +81,6 @@
         </div>
     @endif
 
-    <script src="{{ asset('js/script.js') }}"></script>
-    
+    <script src="{{ asset('js/delete-task.js') }}"></script>
+
 @endsection
