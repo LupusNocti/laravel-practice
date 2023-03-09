@@ -38,7 +38,6 @@ public function store(Request $request)
 }
 
 
-
 public function destroy(Task $task)
 {
     $task->delete();

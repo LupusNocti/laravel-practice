@@ -4,6 +4,8 @@
 @extends('layouts.app')
  
 @section('content')
+
+<div class="container">
  
     <!-- Bootstrap Boilerplate... -->
  
@@ -30,7 +32,7 @@
             <!-- Add Task Button -->
             <div class="form-group">
                 <div class="col-sm-offset-3 col-sm-6">
-                    <button type="submit" class="btn btn-default">
+                    <button type="submit" class="btn btn-success">
                         <i class="fa fa-plus"></i> Add a Task
                     </button>
                 </div>
@@ -68,7 +70,7 @@
                                         {{ csrf_field() }}
                                         {{ method_field('DELETE') }}
 
-                                        <button type="submit" class="btn btn-danger delete-task" data-task-id="{{ $task->id }}">
+                                        <button type="submit" class="btn btn-outline-danger delete-task" data-task-id="{{ $task->id }}">
                                         <i class="fa fa-trash"></i> Remove Task
                                         </button>
                                     </form>
