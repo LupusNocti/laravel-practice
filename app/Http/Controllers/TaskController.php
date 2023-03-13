@@ -24,7 +24,7 @@ public function store(Request $request)
     ]);
  
     if ($validator->fails()) {
-        return redirect('/')
+        return redirect('/tasks')
             ->withInput()
             ->withErrors($validator);
     }
@@ -34,7 +34,7 @@ public function store(Request $request)
     $task->created_at = now(); //sets time to real-time
     $task->save();
  
-    return redirect('/');
+    return redirect('/tasks');
 }
 
 
