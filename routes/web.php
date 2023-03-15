@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\HomeController;
 use App\Http\Middleware\AuthMiddleware;
+use App\Http\Controllers\Auth\LoginController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/tasks', [TaskController::class, 'index']);
@@ -14,7 +15,3 @@ Route::get('/login', function () {
     return view('auth.login');
 })->name('login');
 
-// middleware//
-Route::middleware(['auth'])->group(function () {
-    Route::get('/tasks', [TaskController::class, 'create']);
-});

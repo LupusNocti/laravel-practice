@@ -16,7 +16,10 @@ class TaskController extends Controller
         'tasks' => $tasks
     ]);
 }
-
+public function create()
+{
+    return view('/tasks');
+}
 public function store(Request $request)
 {
     $validator = Validator::make($request->all(), [
@@ -42,7 +45,7 @@ public function destroy(Task $task)
 {
     $task->delete();
  
-    return redirect('/');
+    return redirect('/tasks');
 }
 
 }
