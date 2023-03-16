@@ -20,10 +20,15 @@
     <!-- CSS -->
         <style>
             .ui-widget-header,.ui-state-default, ui-button {
-                background:#3A833A;
-                border: 1px solid #000000;
+                background:#198754;
+                border: 1px solid #198754;
                 color: #FFFFFF;
                 font-weight: bold;
+            }
+            .nav-tans {
+            background-color: #116466;
+            box-shadow: none;
+            color: white;
             }
         </style>
     <!-- Javascript -->
